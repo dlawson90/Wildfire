@@ -10,7 +10,7 @@ const methodOverride = require('method-override');
 const favicon = require('express-favicon');
 
 // Connect to the database
-mongoose.connect('mongodb://admin:qwerty123@ds147096.mlab.com:47096/wildfire', { useNewUrlParser: true });
+mongoose.connect('', { useNewUrlParser: true });
 
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
