@@ -10,10 +10,11 @@ Graded at 88%
 
 ## Login
 
-Login to admin to view the site with admin privileges.
+Login with admin to view the site with admin privileges.
 
 
 Username: admin
+
 Password: qwerty123
 
 
