@@ -1,0 +1,84 @@
+<% include partials/header %>
+<script type="text/javascript" src="/js/kitchen.js"></script>
+
+<!-- Content -->
+<div class="container">
+        <div class="row">
+
+            <div class="col-sm-12 title-row">
+                <h1>Orders</h1>
+                <hr>
+            </div>
+            <!-- function that parses an int (seconds) into a human friendly visual -->
+            <%
+            function formatTime(seconds) {
+                var h = Math.floor(seconds / 3600),
+                        m = Math.floor(seconds / 60) % 60,
+                        s = seconds % 60;
+                if (h < 10) h = "0" + h;
+                if (m < 10) m = "0" + m;
+                if (s < 10) s = "0" + s;
+                return h + ":" + m + ":" + s;
+            }
+            // Handles the timer for the display, with timers higher than 10 min turning into orange and higher than 20 turning into red
+            for(var i = 0; i < orders.length; i++){
+                const timeSinceOrder = orders[i].orderDate;
+                const now = new Date();
+                var className = "card-title text-success";
+                const secondsPassed =Math.round((now - timeSinceOrder) / 1000);
+                const toDisplay = formatTime(secondsPassed);
+                if(secondsPassed >= 600 && secondsPassed < 1200){
+                    className = "card-title text-warning";
+                }else if(secondsPassed >= 1200){
+                    className = "card-title text-danger";
+                }
+            %>
+            <div class="col-md-6 col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-6 kitchen-table-title">
+                                <!-- Display the table number -->
+                                <h3 class="card-title">Table <%= orders[i].tableNum %></h3>
+                            </div>
+                            <div class="col-sm-6 kitchen-table-counter">
+                                <h5 class="<%= className%>"><%= toDisplay %></h5>
+                            </div>
+                        </div>
+                        <hr>
+                    
+                        <table class="table table-sm table-7 card-body">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Product</td>
+                                    <th scope="col" width="30%">Quantity</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <!-- Display the orders, with their details included. -->
+                                <% for(var j = 0; j < orders[i].orderDetail.length; j++){ %>
+                                    <tr>
+                                        <td><%= orders[i].orderDetail[j].productName %></td>
+                                        <td><%= orders[i].orderDetail[j].quantity %></td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                            
+                                
+        
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                <form method="post" action="/counter/<%= orders[i].id %>?_method=PUT">
+                                    <button type="submit" class="btn btn-success order-button"><i data-feather="check-square"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div> <!-- row -->
+    </div> <!-- containter-->
+
+<% include partials/footer %>

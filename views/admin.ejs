@@ -1,0 +1,77 @@
+<% include partials/header %>
+
+
+<script type="text/javascript" src="/js/admin.js"></script>
+<!--Displays the admin page, an editible collection of food items.Also allows to add a food item-->
+<div class="container" id="admin-container">
+        <div class="row">
+            <div class="col-sm-12 title-row">
+                <h1>Admin</h1>
+                <div class="row">
+                    <div class="col-12">
+                        <center><h2>Product List</h2></center>
+                    </div>
+                </div>
+                <!-- Contains the view for adding a food to the db. Works by sending the form details directly to admin via a POST request-->
+                <table class="table">
+                    <form id="addProductForm" method="POST" action="/admin">
+                        <thead>
+                            <tr>
+                                <th>Products</th>
+                                <th>Price</th>
+                                <th>Catgeory</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td class="e"><input name="productName" type="text" class="form-control" placeholder="Product name..." required></td>
+                            <td class="f"><input id="productPrice" name="price" type="number" step="0.01" class="form-control a" placeholder="Product price..." required><label for="productPrice" class="static-value">£</label></td>
+                            <td class="g"><select name="category" class="form-control" required>
+                                <option disabled hidden selected>Product category...</option>
+                                <option value="drinks">Drinks</option>
+                                <option value="noodle">Noodle</option>
+                                <option value="rice">Rice</option>
+                                <option value="western">Western</option></select></td>
+                            <td><input type="submit" class="btn btn-outline-success d" value="Add + "></td>
+                        </tr>
+                    </form>
+                </table>
+                <!-- The save button -->
+                <table class="table">
+                    <div class="row">
+                        <td id="actions" class="adminButtons">
+                            <button id="saveProduct" class="btn btn-outline-success c" >Save</button>
+                        </td>
+                    </div>
+                </table>
+                <table id="adminTable" class="table">
+                    <div class="row">
+                        <!-- Parses the products to display, looping over each product to display the relevant info.
+                        Then jquery is used on admin.js to handle the saving of the data-->
+                        <%products.forEach( product =>{%>
+                            <tr id="<%=product.id%>" class="productRow">
+                                <td class="e">
+                                    <input value="<%=product.productName%>" class="form-control"/>
+                                </td>
+                                <td class="f">
+                                    <input id="productPrice" value="<%=parseFloat(product.price.value).toFixed(2)%>" type="number" step="0.01" class="productPrice a form-control"/>
+                                    <label for="productPrice" class="static-value">£</label>
+                                </td>
+                                <td class="productCategory g">
+                                    <select class="productCategory form-control"><option disabled hidden selected><%=product.category%></option><option value="drinks">Drinks</option><option value="noodle">Noodle</option><option value="rice">Rice</option><option value="western">Western</option></select>
+                                </td>
+                                <td class="productDelete">
+                                    <form action="/admin/<%=product.id%>?_method=DELETE" method="POST">
+                                        <button id="saveProduct" class="btn btn-outline-danger d">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <%});%>
+                    </div>
+                </table>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- containter-->
+
+
+<% include partials/footer %>

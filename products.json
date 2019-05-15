@@ -1,0 +1,12 @@
+{"_id":{"$oid":"5c76592deecedd2bb803ce55"},"productName":"Coca-cola","price":{"$numberDecimal":"1.50"},"category":"drinks"}
+{"_id":{"$oid":"5c767bd97afe85470434bb63"},"productName":"Pepsi","price":{"$numberDecimal":"2.30"},"category":"drinks"}
+{"_id":{"$oid":"5c767c523244544704aa8e44"},"productName":"Beef Noodle","price":{"$numberDecimal":"4.50"},"category":"noodle"}
+{"_id":{"$oid":"5c767c633244544704aa8e45"},"productName":"Chicken Noodle","price":{"$numberDecimal":"3.50"},"category":"noodle"}
+{"_id":{"$oid":"5c767c793244544704aa8e46"},"productName":"Mineral Water","price":{"$numberDecimal":"1.50"},"category":"drinks"}
+{"_id":{"$oid":"5c767c953244544704aa8e47"},"productName":"Spaghetti","price":{"$numberDecimal":"4.50"},"category":"noodle"}
+{"_id":{"$oid":"5c767ca93244544704aa8e48"},"productName":"Lamb noodle","price":{"$numberDecimal":"4.50"},"category":"noodle"}
+{"_id":{"$oid":"5c767cc43244544704aa8e49"},"productName":"Spanish Rice","price":{"$numberDecimal":"2.00"},"category":"rice"}
+{"_id":{"$oid":"5c767cd23244544704aa8e4a"},"productName":"Longanish Rice","price":{"$numberDecimal":"4.50"},"category":"rice"}
+{"_id":{"$oid":"5c767ce83244544704aa8e4b"},"productName":"Butter fried rice","price":{"$numberDecimal":"5.30"},"category":"rice"}
+{"_id":{"$oid":"5c767d033244544704aa8e4c"},"productName":"Burger","price":{"$numberDecimal":"2.50"},"category":"western"}
+{"_id":{"$oid":"5c767d113244544704aa8e4d"},"productName":"Chips","price":{"$numberDecimal":"2.50"},"category":"western"}

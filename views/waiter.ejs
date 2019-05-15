@@ -1,0 +1,157 @@
+<% include partials/header %>
+
+<!-- Content -->
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-12 title-row">
+            <h1>Tables</h1>
+        </div>
+        <!-- Create 6 boxes for each table-->
+        <script>
+            console.log(tableClicked);
+        function defaultAllTables()
+		{
+			<% for(x = 1; x <= 6; x++)
+			{%>
+				table<%=x%>.style = "border: 1px solid black";
+			<%}%>
+			document.getElementById("order-form").reset();
+		}
+        </script>
+
+        <!-- Loop table number -->
+        <!-- Whenever the boxes is clicked, the border color will be change-->
+        <% for(i = 1; i <= 6; i++)
+        {%>
+        	<script>
+        		function table<%=i%>Clicked()
+				{
+					tableClicked = <%=i%>;
+					console.log("Table " + tableClicked + " clicked");
+                    tableNum.value = tableClicked;
+					defaultAllTables();
+					table<%=i%>.style = "border: 2px solid #28a745";
+					changeTableButtonText(tableClicked);
+                    tableSelector.disabled = false;
+				}
+            </script>
+            <!-- For each table clicked, the number of toggle button will change to the table number-->
+            <div class="col-sm-4 col-md-3">
+                <div class="card" onClick="table<%=i%>Clicked();" id="table<%=i%>">
+                    <div class="card-body">
+                        <h3 class="card-title">Table <%=i %></h3>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+    </div>
+
+    <!-- toggle button to show the menu -->   
+    <div class="row">
+        <div class="offset-lg-2 col-md-12 col-lg-8" style="margin-bottom: 25px">
+            <button type="submit" class="btn btn-primary btn-block" id="tableSelector" type="button" data-toggle="collapse" data-target="#collapseMenu" disabled>Select a Table</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="offset-lg-2 col-sm-12 col-lg-8">
+            <div class="card collapse" id="collapseMenu">
+                <div class="card-body">
+                        <div class="card-title">
+                            <h3 id="menuTitleNum">Order for Table 1</h3>
+                            <hr>
+                        </div>
+
+                        <form action="/kitchen" method="post" id="order-form">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <p class="lead">Noodle Dishes</p>
+                                </div>
+                                <!-- Loop the noodle dishes from database into the selection form-->
+                                <% products.forEach(function(product){
+                                    if(product.category == 'noodle') { 
+                                        var item = product.productName.replace(/\s/g, '');
+                                        item = item.toLowerCase();
+                                        %>                                 
+                                        <div class="col-sm-6 item-name">
+                                            <p><%= product.productName %> <em class="text-info"> <%= '- £' + product.price %></em></p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group text-right">
+                                                <input type="number" class="form-control item-quantity-input" min="0" max="50" value="0" id="<%= item %>" name="<%= product.productName %>">
+                                            </div>
+                                        </div>
+                                <% }}); %>
+                                <div class="col-sm-12"><hr></div>
+                                <div class="col-sm-12">
+                                    <p class="lead">Rice Dishes</p>
+                                </div>
+                                <!-- Loop the rice dishes from database into the selection form-->
+                                <% products.forEach(function(product){
+                                    if(product.category == 'rice') {
+                                        var item = product.productName.replace(/\s/g, '');
+                                        item = item.toLowerCase();
+                                        %>                                 
+                                        <div class="col-sm-6">
+                                            <p><%= product.productName %> <em class="text-info"> <%= '- £' + product.price %></em></p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control item-quantity-input" min="0" max="50" value="0" id="<%= item %>" name="<%= product.productName %>">
+                                            </div>
+                                        </div>
+                                <% }}); %>
+                                <div class="col-sm-12"><hr></div>
+                                <div class="col-sm-12">
+                                    <p class="lead">Western Dishes</p>
+                                </div>
+                                <!-- Loop the werstern dishes from database into the selection form-->
+                                <% products.forEach(function(product){
+                                    if(product.category == 'western') { 
+                                        var item = product.productName.replace(/\s/g, '');
+                                        item = item.toLowerCase();
+                                        %>                                 
+                                        <div class="col-sm-6">
+                                            <p><%= product.productName %> <em class="text-info"> <%= '- £' + product.price %></em></p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control item-quantity-input" min="0" max="50" value="0" id="<%= item %>" name="<%= product.productName %>">
+                                            </div>
+                                        </div>
+                                <% }}); %>
+                                <div class="col-sm-12"><hr></div>
+                                <div class="col-sm-12">
+                                    <p class="lead">Drinks</p>
+                                </div>
+                                <!-- Loop the drinks from database into the selection form-->
+                                <% products.forEach(function(product){
+                                    if(product.category == 'drinks') { 
+                                        var item = product.productName.replace(/\s/g, '');
+                                        item = item.toLowerCase();
+                                        %>                                 
+                                        <div class="col-sm-6">
+                                            <p><%= product.productName %> <em class="text-info"> <%= '- £' + product.price %></em></p>
+                                        </div>
+                                        <div class="col-sm-6 text-right">
+                                            <div class="form-group">
+                                                <input type="number" class="form-control item-quantity-input" min="0" max="50" value="0" id="<%= item %>" name="<%= product.productName %>">
+                                            </div>
+                                        </div>
+                            
+                                <% }}); %>     
+                            </div>
+                            <hr>
+                            <!-- Submit button -->
+                            <input type="hidden" name="tableNum" value="0" id="tableNum">
+                            <button type="submit" class="btn btn-primary btn-block col-sm-12">Submit Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- row -->
+</div> <!-- containter-->
+
+<% include partials/footer %>

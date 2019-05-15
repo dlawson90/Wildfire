@@ -1,0 +1,147 @@
+<% include partials/header %>
+
+<!-- Content -->
+ <div class="container">
+        <div class="row">
+
+            <div class="col-sm-12 title-row">
+                <h1>Counter</h1>
+                <hr>
+            </div>
+            <!-- Loop all the orders that completed-->
+            <% for(var i = 0; i < orders.length; i++){ %>
+                <% //console.log(orders[0].discount); %>
+            <div class="col-sm-12 table-title" data-toggle="collapse" href="#collapse<%=i%>" role="button">
+                <div class="row">
+                    <div class="col-sm-6 text-center-sm  my-auto"><h4>Table <%= orders[i].tableNum %></h4></div>
+                    <div class="col-sm-6 text-center-sm down-arrow my-auto"><i data-feather="chevrons-down"></i></div>
+                </div>
+            </div>
+            <div class="col-sm-12 table-panel collapse" id="collapse<%=i%>">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p class="lead">Order</p>
+                        <hr>
+                    </div>
+                    <!-- A table to show the item, quantity and price -->
+                    <div class="col-sm-8">
+                        <table class="table-orders">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="">Item</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Display product name, quantity and price-->
+                                <%
+                                //Starting running total
+                                var orderTotal = 0;
+
+                                for(var j = 0; j < orders[i].orderDetail.length; j++){ %>
+                                <tr>
+                                <%
+                                %>
+                                    <td><%= orders[i].orderDetail[j].productName %></td>
+                                    <td><%= orders[i].orderDetail[j].quantity %></td>
+                                    <!-- calculation for price-->
+                                    <% for(var k = 0; k < prices.length; k++)
+                                    {
+                                    	if(prices[k].productName == orders[i].orderDetail[j].productName)
+                                    	{
+                                    		var item_total = orders[i].orderDetail[j].quantity * prices[k].price;
+                                    		var item_total_formatted = parseFloat(item_total).toFixed(2);
+
+                                    		orderTotal += item_total;
+                                    	%>
+                                    		<td>£<%= item_total_formatted %></td>
+                                    	<%
+                                    	}
+                                    }
+                                    %>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <hr class="border-sm">
+                                <table class="table-totals">
+                                    <tr>
+                                        <!-- Sub-total -->
+                                        <td class="w-50"><strong>Sub-Total:</strong></td>
+                                        <td>£<%= parseFloat(orderTotal).toFixed(2); %></td>
+                                    </tr>
+                                    <tr>
+                                        <!-- Discount -->
+                                        <td><strong>Discount:</strong></td>
+                                        <td><%= orders[i].discount %>%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total:</strong></td>
+                                        <!-- Calculation for total price-->
+                                        <%
+                                            var x = 100-orders[i].discount;
+                                            x = x/100;
+                                            var total = orderTotal * x
+                                            total = parseFloat(total).toFixed(2);
+                                        %>
+                                        <td>£<%= total %>  </td>
+                                    </tr>
+                                </table>
+                                <hr>
+                            </div>
+                            <div class="col-sm-12 text-center">
+                                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#discountModal<%=i%>"><i data-feather="dollar-sign"></i> Add Discount</button>
+                                <hr>
+                            </div>
+                            <!-- Print button-->
+                            <div class="col-sm-6 text-center">
+                                <form method="post" action="/printer/<%= orders[i].id %>">
+                                    <button type="submit" class="btn btn-info print-btn"><i data-feather="printer"></i> Print</button>
+                                </form>
+                            </div>
+                            <!-- Pay button-->
+                            <div class="col-sm-6 text-center">
+                                <form method="post" action="/admin/<%= orders[i].id %>?_method=PUT">
+                                    <input type="hidden" name="total" value="<%= total %>">
+                                    <button type="submit" class="btn btn-success pay-btn"><i data-feather="credit-card"></i> Pay</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Add discount code -->
+            <div class="modal fade" id="discountModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Discount Code</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/counter/<%= orders[i].id %>/discount?_method=PUT" method="post">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="discount" placeholder="e.g. enter 20 for 20% discount.">
+                                </div>
+                                <!-- add discount button-->
+                                <button type="submit" class="btn btn-success">Add Discount</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <% } %>
+        </div> <!-- row -->
+    </div> <!-- containter-->
+
+
+<% include partials/footer %>

@@ -1,0 +1,194 @@
+.title-row {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.card {
+    margin-bottom: 25px;
+}
+
+.card-body ul {
+    margin-bottom: 15px;
+}
+
+.table-title {
+    border: 1px solid #DDD;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+    background-color: #EEE;
+    margin: 25px 0 0 0;
+}
+
+.table-panel {
+    border-bottom: 1px solid #DDD;
+    border-left: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    border-radius: 0 0 5px 5px;
+    padding: 10px;
+}
+
+.table-orders {
+    width: 80%;
+}
+
+.table-orders td, .table-orders th {
+    border: 1px solid #EEE;
+    padding: 5px;
+}
+
+.table-orders td {
+    border: 1px solid #EEE;
+}
+
+.table-totals {
+    width: 100%;
+}
+
+.down-arrow {
+    text-align: right;
+}
+
+.border-sm {
+    display: none;
+}
+
+.kitchen-table-counter {
+    text-align: right;
+}
+
+#admin-container button {
+    float: right;
+}
+
+#admin-container button.a {
+    font-size: 20px;
+}
+
+#admin-container button.b {
+    float: left;
+    font-size: 20px;
+}
+
+#admin-container button.c {
+    width: 100%;
+}
+
+#admin-container button.d {
+    width: 100%;
+}
+
+#admin-container li {
+    list-style-type: none;
+    text-transform: capitalize;
+}
+
+#admin-container li.a {
+    list-style-type: decimal;
+}
+
+#admin-container li.b {
+    margin-top: -10px;
+    padding-bottom: 34px;
+}
+
+#admin-container input, select {
+    height: 37.5px;
+}
+
+#admin-container td.e {
+    width: 30%;
+}
+
+#admin-container td.f {
+    width: 25%;
+    position:relative;
+}
+
+#admin-container td.g {
+    width: 25%;
+}
+
+#admin-container input.d {
+    width: 100%;
+}
+
+#admin-container input.a{
+    padding:5px 5px 5px 25px;
+}
+
+#admin-container .static-value{
+    position:absolute;
+    left:20px;
+    font-weight:bold;
+    font-size:1.2em;
+    color:#3A3939;
+    top:17px;
+}
+
+.item-quantity-input {
+    width: 50%;
+    display: inline-block;
+}
+
+.item-name {
+    padding-top: 9px;
+}
+
+/* COL-XS */
+@media screen and (max-width: 575px) {
+
+    .print-btn {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .pay-btn {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+
+    .text-center-sm {
+        text-align: center;
+    }
+
+    .table-orders {
+        width: 100%;
+    }
+    
+    .border-sm {
+        display: block;
+    }
+
+    .table-title {
+        margin: 10px 10px 0 10px;
+    }
+
+    .table-panel {
+        margin: 0 10px 25px 10px;
+    }
+
+    .kitchen-table-title {
+        text-align: center;
+    }
+
+    .kitchen-table-counter {
+        text-align: center;
+    }
+
+    .order-button {
+        display: block;
+        margin-top: 20px;
+    }
+    .item-quantity-input {
+        width: 100%;
+        display: inline-block;
+    }
+}
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }
+}

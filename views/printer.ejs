@@ -1,0 +1,50 @@
+<% include partials/header %>
+
+<!-- Content -->
+ <div class="container">
+        <div class="row">
+            <div class="col-sm-12 title-row">
+                <h1>Order Summary for Table <%= order[0].tableNum %></h1>
+                <hr>
+                <%
+                var orderTotal = 0;
+                for(var i = 0; i < order[0].orderDetail.length; i++)
+                {
+                    for(var k = 0; k < prices.length; k++)
+                    {
+                        if(prices[k].productName == order[0].orderDetail[i].productName)
+                        {
+                            var item_total = order[0].orderDetail[i].quantity * prices[k].price;
+                            var item_total_formatted = parseFloat(item_total).toFixed(2);
+
+                            orderTotal += item_total;
+                                        %>
+                                            <td><%=order[0].orderDetail[i].quantity%> x <%=order[0].orderDetail[i].productName %> (£<%= item_total_formatted %>)</td>
+                                        <br/>
+                                        <%
+                                        }
+                                }
+                            }
+                                    %>
+                <hr>
+                <strong>Sub-total:</strong> £<%= orderTotal%>
+                <br>
+                <strong>Discount:</strong> <%= order[0].discount %>%
+                <br>
+                <strong>Total:</strong> £<%= Math.round((orderTotal - ((orderTotal / 100) * order[0].discount)) * 100) /100%>
+                <hr>
+                <strong>Order Date:</strong> <%= order[0].orderDate %>
+                <hr>
+                <!-- Print Button -->
+                <button class="btn btn-info print-btn no-print" onclick="printFunction()"><i data-feather="printer"></i> Print</button>
+                <br><br>
+                <a href="/counter" class="no-print">&laquo; back</a>
+            </div>
+        </div> <!-- row -->
+    </div> <!-- containter-->
+
+  
+
+<% include partials/footer %>
+
+

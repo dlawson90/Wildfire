@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <!-- JQuery -->
+    <script src="/js/jquery-3.3.1.min.js"></script>     
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+    <title>Wildfire - Paperless Restaurant Ordering System</title>
+</head>
+<body>
+
+    <!-- Navigation, displays the navabar, showing some items only if the user is logged in/ is the admin-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/waiter">Wildfire</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/waiter">Waiter</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/kitchen">Kitchen</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/counter">Counter</a>
+                </li>
+                <% if(currentUser){ %>
+                    <% if(currentUser.username == 'admin' || currentUser.username == 'Admin'){ %>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <% }} %>
+            </ul>
+            <% if (currentUser) { %>
+                <ul class="navbar-nav ml-auto">
+                    <li>
+                        <a class="nav-link">Hello, <%= currentUser.username %>!</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout"><i data-feather="log-out"></i> Logout</a>
+                    </li>
+                </ul>
+            <% } %>
+        </div>
+    </nav>
